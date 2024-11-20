@@ -1,10 +1,10 @@
 import { skipToMainContent } from "$digerati/skipToMainContent";
-import { formValidation } from "./digerati/formValidation";
 import { currentYear } from "$digerati/currentYear";
+import { headingCircleHighlight } from "./pivotalCapital/headingCircleHighlight";
 
 window.Webflow || [];
 window.Webflow.push(() => {
   skipToMainContent();
-  formValidation();
   currentYear();
+  headingCircleHighlight();
 });

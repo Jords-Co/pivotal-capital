@@ -6,6 +6,9 @@
     "paths": {
       "$digerati/*": [
         "src/digerati/*"
+      ],
+      "$pivotalCapital/*": [
+        "src/pivotalCapital/*"
       ]
     },
     "types": [
