@@ -11,6 +11,7 @@ export const headingCircleHighlight = () => {
     }
     circleWrappers.forEach((circleWrapper, index) => {
         let circleElement = circleElements[index];
+        circleWrapper.innerHTML = '<span class="z-index-2">' + circleWrapper.textContent + '</span>';
         circleWrapper.appendChild(circleElement.cloneNode(true));
     });
 };
