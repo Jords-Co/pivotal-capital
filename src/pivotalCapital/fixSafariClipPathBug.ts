@@ -11,6 +11,6 @@ export const fixSafariClipPathBug = () => {
         return;
     }
     clipPathElements.forEach((clipPathElement) => {
-        clipPathElement.style.clipPath = 'none';
+        clipPathElement.removeAttribute('style');
     });
 }
