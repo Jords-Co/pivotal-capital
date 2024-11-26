@@ -1,1 +1,55 @@
-"use strict";(()=>{var i=()=>{let e=document.querySelector('[dd-skip-to-main-content="trigger"]'),t=document.querySelector('[dd-skip-to-main-content="target"]');!e||!t||["click","keypress"].forEach(r=>{e.addEventListener(r,n=>{n.type==="keydown"&&n.which!==13||(n.preventDefault(),t.setAttribute("tabindex","-1"),t.focus())})})};var o=()=>{let e=document.querySelector('[dd-date="current-year"]');if(!e)return;let t=new Date().getFullYear();e.innerText=t.toString()};var c=()=>{let e=document.querySelectorAll('[dd-circle-highlight="wrapper"]'),t=document.querySelectorAll('[dd-circle-highlight="element"]');!e||!t||e.forEach((r,n)=>{let a=t[n];r.innerHTML='<span class="z-index-2">'+r.textContent+"</span>",r.appendChild(a.cloneNode(!0))})};var l=()=>{let e=navigator.userAgent.toLowerCase(),t=e.indexOf("safari/")>-1&&e.indexOf("chrome/")===0,r=document.querySelectorAll('[dd-clip-path="true"]');!t||!r||r.forEach(n=>{n.removeAttribute("style")})};window.Webflow;window.Webflow.push(()=>{i(),o(),c(),l()});})();
+"use strict";
+(() => {
+  // bin/live-reload.js
+  new EventSource(`${"http://localhost:3000"}/esbuild`).addEventListener("change", () => location.reload());
+
+  // src/digerati/skipToMainContent.ts
+  var skipToMainContent = () => {
+    const trigger = document.querySelector('[dd-skip-to-main-content="trigger"]'), target = document.querySelector('[dd-skip-to-main-content="target"]');
+    if (!trigger || !target) {
+      return;
+    }
+    ["click", "keypress"].forEach((event) => {
+      trigger.addEventListener(event, (e) => {
+        if (e.type === "keydown" && e.which !== 13) {
+          return;
+        }
+        e.preventDefault();
+        target.setAttribute("tabindex", "-1");
+        target.focus();
+      });
+    });
+  };
+
+  // src/digerati/currentYear.ts
+  var currentYear = () => {
+    const target = document.querySelector('[dd-date="current-year"]');
+    if (!target) {
+      return;
+    }
+    const fullYear = (/* @__PURE__ */ new Date()).getFullYear();
+    target.innerText = fullYear.toString();
+  };
+
+  // src/pivotalCapital/headingCircleHighlight.ts
+  var headingCircleHighlight = () => {
+    const circleWrappers = document.querySelectorAll('[dd-circle-highlight="wrapper"]'), circleElements = document.querySelectorAll('[dd-circle-highlight="element"]');
+    if (!circleWrappers || !circleElements) {
+      return;
+    }
+    circleWrappers.forEach((circleWrapper, index) => {
+      let circleElement = circleElements[index];
+      circleWrapper.innerHTML = '<span class="z-index-2">' + circleWrapper.textContent + "</span>";
+      circleWrapper.appendChild(circleElement.cloneNode(true));
+    });
+  };
+
+  // src/index.ts
+  window.Webflow || [];
+  window.Webflow.push(() => {
+    skipToMainContent();
+    currentYear();
+    headingCircleHighlight();
+  });
+})();
+//# sourceMappingURL=index.js.map
