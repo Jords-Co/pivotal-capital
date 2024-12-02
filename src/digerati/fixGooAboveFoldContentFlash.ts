@@ -8,6 +8,11 @@ export const fixGooAboveFoldContentFlash = () => {
     if (!h1) {
         return
     }
+    const span = h1.querySelector('span');
+    if (span) {
+        h1.classList.remove('text-style-hidden');
+        return;
+    }
     new MutationObserver(function () {
         h1.classList.remove('text-style-hidden');
     }).observe(h1, {
